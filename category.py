@@ -5,3 +5,4 @@ class _category:
         self.name = name;
         self.items = items
 
+c = "Hello World"
