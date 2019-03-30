@@ -13,11 +13,14 @@ connection = pymysql.connect(host='localhost',
 try:
     with connection.cursor() as cursor:
         # Read a single record
-        sql = "SELECT `*` FROM `label`"
+        a = ["hello", 2 ,4, 8.4353, True, 'a']
+        print (a)
+
+        sql = "SELECT `*` FROM `referance`"
         cursor.execute(sql)
         result = cursor.fetchone()
         for i in result:
-           print(i["tag_name"])
+           print(i)
 finally:
     connection.close()
 
