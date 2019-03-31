@@ -45,7 +45,11 @@ def find_parent(root, id):
     return None
 
 
-def Category_tree_click(self):
+def Category_tree_click():
+    s = ui.sender()
+    print (s.currentItem().text(0))
+
+
 
 if __name__ == "__main__":
     import sys
