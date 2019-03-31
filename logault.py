@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'logault.ui'
+# Form implementation generated from reading ui file 'A:\SEMESTER_6\Software_Engineering\logault\logault.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -11,11 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(950, 600)
+        MainWindow.resize(943, 602)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 181, 34))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 181, 36))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.toobox = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.toobox.setContentsMargins(0, 0, 0, 0)
@@ -67,6 +67,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
         self.cat_and_lab_container.addWidget(self.lineEdit)
         self.category_tree = QtWidgets.QTreeWidget(self.verticalLayoutWidget)
+        self.category_tree.setMouseTracking(True)
         self.category_tree.setObjectName("category_tree")
         item_0 = QtWidgets.QTreeWidgetItem(self.category_tree)
         icon3 = QtGui.QIcon()
@@ -77,13 +78,12 @@ class Ui_MainWindow(object):
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("icons/home.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item_0.setIcon(0, icon4)
-        item_1 = QtWidgets.QTreeWidgetItem(item_0)
         self.cat_and_lab_container.addWidget(self.category_tree)
         self.scrollArea = QtWidgets.QScrollArea(self.verticalLayoutWidget)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 177, 230))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 177, 232))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.groupBox = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox.setGeometry(QtCore.QRect(0, 0, 181, 221))
@@ -109,7 +109,7 @@ class Ui_MainWindow(object):
         self.ref_box_title.setObjectName("ref_box_title")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 950, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 943, 26))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -126,6 +126,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
+        self.category_tree.itemPressed['QTreeWidgetItem*','int'].connect(MainWindow.setFocus)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -134,11 +135,13 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "LogAult"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Search your library..."))
         self.category_tree.headerItem().setText(0, _translate("MainWindow", "My Library"))
+        self.category_tree.headerItem().setText(1, _translate("MainWindow", "id"))
         __sortingEnabled = self.category_tree.isSortingEnabled()
         self.category_tree.setSortingEnabled(False)
         self.category_tree.topLevelItem(0).setText(0, _translate("MainWindow", "Recent"))
+        self.category_tree.topLevelItem(0).setText(1, _translate("MainWindow", "-1"))
         self.category_tree.topLevelItem(1).setText(0, _translate("MainWindow", "root"))
-        self.category_tree.topLevelItem(1).child(0).setText(0, _translate("MainWindow", "newfolder"))
+        self.category_tree.topLevelItem(1).setText(1, _translate("MainWindow", "3"))
         self.category_tree.setSortingEnabled(__sortingEnabled)
         self.groupBox.setTitle(_translate("MainWindow", "Labels"))
         __sortingEnabled = self.label_list.isSortingEnabled()
@@ -150,6 +153,10 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.menuView.setTitle(_translate("MainWindow", "View"))
         self.actionAbout_Us.setText(_translate("MainWindow", "About Us"))
+
+    def func(self):
+        print(self)
+
 
 
 if __name__ == "__main__":

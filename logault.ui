@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>600</height>
+    <width>943</width>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>181</width>
-      <height>34</height>
+      <height>36</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="toobox">
@@ -132,9 +132,17 @@
      </item>
      <item>
       <widget class="QTreeWidget" name="category_tree">
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
        <column>
         <property name="text">
          <string>My Library</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>id</string>
         </property>
        </column>
        <item>
@@ -144,6 +152,9 @@
         <property name="icon">
          <iconset>
           <normaloff>icons/recent.png</normaloff>icons/recent.png</iconset>
+        </property>
+        <property name="text">
+         <string>-1</string>
         </property>
         <property name="flags">
          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -157,11 +168,9 @@
          <iconset>
           <normaloff>icons/home.png</normaloff>icons/home.png</iconset>
         </property>
-        <item>
-         <property name="text">
-          <string>newfolder</string>
-         </property>
-        </item>
+        <property name="text">
+         <string>3</string>
+        </property>
        </item>
       </widget>
      </item>
@@ -176,7 +185,7 @@
           <x>0</x>
           <y>0</y>
           <width>177</width>
-          <height>230</height>
+          <height>232</height>
          </rect>
         </property>
         <widget class="QGroupBox" name="groupBox">
@@ -257,8 +266,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>950</width>
-     <height>22</height>
+     <width>943</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
@@ -283,5 +292,22 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>category_tree</sender>
+   <signal>itemPressed(QTreeWidgetItem*,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
