@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a0bdd96c-211a-4166-956e-0a4fe420e946" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/bin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/home.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/new.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/newd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/recent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/reference.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_handling.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_handling.py" afterDir="false" />
-    </list>
+    <list default="true" id="a0bdd96c-211a-4166-956e-0a4fe420e946" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,20 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_handling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="200">
               <caret line="10" column="68" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logault.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="128" column="57" lean-forward="true" selection-start-line="128" selection-start-column="57" selection-end-line="128" selection-end-column="57" />
-              <folding>
-                <element signature="e#196#238#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -59,7 +36,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/category.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="100">
               <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
             </state>
           </provider>
@@ -68,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="580">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -106,10 +83,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="48" />
-    <option name="y" value="26" />
-    <option name="width" value="1318" />
-    <option name="height" value="742" />
+    <option name="x" value="47" />
+    <option name="y" value="25" />
+    <option name="width" value="1319" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -204,6 +181,7 @@
       <workItem from="1553959251133" duration="565000" />
       <workItem from="1553975288398" duration="1176000" />
       <workItem from="1554016114726" duration="7987000" />
+      <workItem from="1554025148353" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="category class is created">
       <created>1553957872566</created>
@@ -219,17 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1553959401445</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="category class is created">
+      <created>1554025353737</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554025353737</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20028000" />
+    <option name="totallyTimeSpent" value="20286000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="27" width="1317" height="741" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1487" height="878" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.27065304" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27011895" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -294,34 +278,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/category.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logault.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="128" column="57" lean-forward="true" selection-start-line="128" selection-start-column="57" selection-end-line="128" selection-end-column="57" />
-          <folding>
-            <element signature="e#196#238#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/logault.py" />
     <entry file="file://$PROJECT_DIR$/db_handling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="200">
           <caret line="10" column="68" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/category.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        <state relative-caret-position="580">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
