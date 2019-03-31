@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QTreeWidgetItem
 from db_handling import connection
 import logault
 
+def bindings():
+    ui.category_tree.clicked.connect(Category_tree_click)
 
 
 def populate_tree():
@@ -43,12 +45,15 @@ def find_parent(root, id):
     return None
 
 
+def Category_tree_click(self):
+
 if __name__ == "__main__":
     import sys
     app = logault.QtWidgets.QApplication(sys.argv)
     MainWindow = logault.QtWidgets.QMainWindow()
     ui = logault.Ui_MainWindow()
     ui.setupUi(MainWindow)
+    bindings()
     populate_tree()
 
 
