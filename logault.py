@@ -135,6 +135,7 @@ class Ui_MainWindow(QWidget):
         self.cat_and_lab_container.addWidget(self.scrollArea)
         self.ref_box_title = QtWidgets.QLabel(self.centralwidget)
         self.ref_box_title.setGeometry(QtCore.QRect(190, 0, 459, 39))
+        self.ref_box_title.setStyleSheet("background-color : tomato")
         self.ref_box_title.setObjectName("ref_box_title")
         self.reference_table = QtWidgets.QTableWidget(self.centralwidget)
         self.reference_table.setGeometry(QtCore.QRect(190, 40, 461, 511))
@@ -211,6 +212,7 @@ class Ui_MainWindow(QWidget):
         self.comboBox = QtWidgets.QComboBox(self.dockWidgetContents)
         self.comboBox.setMouseTracking(True)
         self.comboBox.setEditable(True)
+        self.comboBox.setCurrentText("")
         self.comboBox.setObjectName("comboBox")
         self.verticalLayout.addWidget(self.comboBox)
         self.saveButton = QtWidgets.QPushButton(self.dockWidgetContents)
@@ -223,12 +225,13 @@ class Ui_MainWindow(QWidget):
         self.menuHelp.addAction(self.actionAbout_Us)
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Logault"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "LogAult"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Search your library..."))
         self.category_tree.headerItem().setText(0, _translate("MainWindow", "My Library"))
@@ -259,7 +262,6 @@ class Ui_MainWindow(QWidget):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.menuView.setTitle(_translate("MainWindow", "View"))
         self.newReference.setWindowTitle(_translate("MainWindow", "Reference Editor"))
-        self.comboBox.setCurrentText(_translate("MainWindow", "Select Labels"))
         self.saveButton.setText(_translate("MainWindow", "Save"))
         self.actionAbout_Us.setText(_translate("MainWindow", "About Us"))
 

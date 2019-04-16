@@ -84,7 +84,7 @@ def save_a_reference():
         cursor.execute(sql)
         connection.commit()
         ui.newReference.setProperty("id", "0")
-        ui.category_tree.clic
+        ui.category_tree.clicked
     elif(id=="0"):
         if(ui.category_tree.currentItem().text(0)=="Recent"):
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
