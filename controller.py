@@ -1,6 +1,7 @@
 from builtins import print
 
 from PyQt5 import QtGui
+from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit
 from db_handling import connection
 import logault
@@ -60,7 +61,7 @@ def delete_label():
 
 
 def delete_category():
-    if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "3"):
+    if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "1"):
         return
     cursor = connection.cursor()
     sql = "DELETE FROM `logault_final`.`category` WHERE (`cat_id` = '"+ui.category_tree.currentItem().text(1)+"')"
@@ -73,7 +74,8 @@ def save_a_reference():
     if(len(ui.bodyBar.toPlainText())==0):
         gen_msg_box(QMessageBox.Warning, "Reference must have a body", "Type in text for reference body to proceed","Error 777: Invalid Reference")
         return;
-    if(id!="0"):
+    if(id!="0"):#editing a reference
+        ui.newReference.setWindowTitle("Reference Editor")
         cursor = connection.cursor()
         sql = "UPDATE `logault_final`.`reference` SET `title` = '" + ui.titleBar.toPlainText()+\
               "',`body` = '"+ui.bodyBar.toPlainText()+\
@@ -83,8 +85,7 @@ def save_a_reference():
         # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
-        ui.newReference.setProperty("id", "0")
-        ui.category_tree.clicked
+        # ui.newReference.setProperty("id", "0")
     elif(id=="0"):
         if(ui.category_tree.currentItem().text(0)=="Recent"):
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
@@ -98,6 +99,10 @@ def save_a_reference():
         # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
+        ui.titleBar.clear()
+        ui.bodyBar.clear()
+        ui.sourceBar.clear()
+        populate_reference_table('me')
         ui.newReference.setDisabled(True)
 
 def display_reference():
@@ -166,16 +171,19 @@ def make_new_reference():
         ui.newReference.setProperty("id","0")
         ui.newReference.setVisible(True)
         ui.newReference.setDisabled(False)
+        ui.titleBar.clear()
+        ui.bodyBar.clear()
+        ui.sourceBar.clear()
         ui.newReference.setWindowTitle("New Reference")
 
 def populate_tree():
         # read database
-        myroot = find_parent(ui.category_tree.invisibleRootItem(), str(3))
+        myroot = find_parent(ui.category_tree.invisibleRootItem(), str(1))
         while(myroot.childCount()):
             myroot.removeChild(myroot.child(0))
 
         cursor = connection.cursor()
-        sql = "SELECT `*` FROM `category`"
+        sql = "SELECT `*` FROM `category` ORDER BY `parent_cat` DESC"
         cursor.execute(sql)
         result = cursor.fetchall()
 
