@@ -490,6 +490,12 @@
    <property name="windowTitle">
     <string>Reference Editor</string>
    </property>
+   <property name="path" stdset="0">
+    <string/>
+   </property>
+   <property name="id" stdset="0">
+    <string/>
+   </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>

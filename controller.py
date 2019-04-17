@@ -2,9 +2,12 @@ from builtins import print
 
 from PyQt5 import QtGui
 from PyQt5.QtGui import QKeyEvent
-from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit
+from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit, QFileDialog
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QWidget
 from db_handling import connection
 import logault
+from new_reference_DialogBox import Ui_Dialog
 import time
 
 
@@ -26,6 +29,8 @@ def initiate():
     ui.newReference.setDisabled(True)
     populate_tree()
     populate_label_table()
+
+    # getChoice()
 
 def add_label():
     newLabel = getText("New Label", "Label name:")
@@ -70,6 +75,7 @@ def delete_category():
     populate_tree()
 
 def save_a_reference():
+    path = ui.newReference.property('path')
     id = ui.newReference.property("id")
     if(len(ui.bodyBar.toPlainText())==0):
         gen_msg_box(QMessageBox.Warning, "Reference must have a body", "Type in text for reference body to proceed","Error 777: Invalid Reference")
@@ -91,10 +97,11 @@ def save_a_reference():
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
             return
         cursor = connection.cursor()
-        sql = "INSERT INTO `logault_final`.`reference` (`body`, `title`, `source`, `cat_id`) VALUES ('"\
+        sql = "INSERT INTO `logault_final`.`reference` (`body`, `title`, `source`, `file_path`, `cat_id`) VALUES ('"\
               +ui.bodyBar.toPlainText()+"','"\
               +ui.titleBar.toPlainText() + "','"\
               +ui.sourceBar.toPlainText() + "','"\
+              +path + "','"\
               +ui.category_tree.currentItem().text(1) + "')"
         # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
@@ -168,6 +175,18 @@ def make_new_reference():
         gen_msg_box(QMessageBox.Warning,"You have not selected a category","Select an appropriate category to proceed","Error 404: Invalid Category")
         # msg.setDetailedText("The details are as follows:")
     else:
+        #code to display the dialog box for referencing a file
+        Dialog = QtWidgets.QDialog()
+        ui_d = Ui_Dialog()
+        ui_d.setupUi(Dialog)
+        Dialog.show()
+
+        rsp = Dialog.exec_() #calling exec so dialog window can stay open and rsp stores which button we pressed
+
+        if rsp == QtWidgets.QDialog.Accepted:
+            path = open_file_name_dialog()
+
+        ui.newReference.setProperty("path", path)
         ui.newReference.setProperty("id","0")
         ui.newReference.setVisible(True)
         ui.newReference.setDisabled(False)
@@ -176,6 +195,12 @@ def make_new_reference():
         ui.sourceBar.clear()
         ui.newReference.setWindowTitle("New Reference")
 
+def open_file_name_dialog():
+    options = QFileDialog.Options()
+    name, _ = QFileDialog.getOpenFileName(ui,'','', 'pdf(*.pdf)') #gets pdf files only
+    if name:
+        return name
+
 def populate_tree():
         # read database
         myroot = find_parent(ui.category_tree.invisibleRootItem(), str(1))
@@ -183,7 +208,7 @@ def populate_tree():
             myroot.removeChild(myroot.child(0))
 
         cursor = connection.cursor()
-        sql = "SELECT `*` FROM `category` ORDER BY `parent_cat` DESC"
+        sql = "SELECT `*` FROM `category` ORDER BY `parent_cat`"
         cursor.execute(sql)
         result = cursor.fetchall()
 

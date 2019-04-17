@@ -203,6 +203,8 @@ class Ui_MainWindow(QWidget):
         self.newReference = QtWidgets.QDockWidget(MainWindow)
         self.newReference.setMouseTracking(True)
         self.newReference.setFeatures(QtWidgets.QDockWidget.DockWidgetClosable|QtWidgets.QDockWidget.DockWidgetFloatable)
+        self.newReference.setProperty("path", "")
+        self.newReference.setProperty("id", "")
         self.newReference.setObjectName("newReference")
         self.dockWidgetContents = QtWidgets.QWidget()
         self.dockWidgetContents.setObjectName("dockWidgetContents")
