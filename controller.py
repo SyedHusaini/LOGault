@@ -8,11 +8,12 @@ from PyQt5.QtWidgets import QWidget
 from db_handling import connection
 import logault
 from new_reference_DialogBox import Ui_Dialog
-import time
+import time, subprocess
 
 
 
 def initiate():
+    ui.reference_table.hideColumn(5)# hiding the path of the file
     ui.category_tree.hideColumn(1)  # hiding category id column
     ui.reference_table.hideColumn(4)# hiding reference id column
     ui.label_table.hideColumn(1)# hiding label id column
@@ -22,6 +23,7 @@ def initiate():
     ui.new_dir_button.clicked.connect(make_new_category)
     ui.new_reference_button.clicked.connect(make_new_reference)
     ui.reference_table.clicked.connect(display_reference)
+    ui.reference_table.doubleClicked.connect(display_referenced_pdf)
     ui.label_table.clicked.connect(populate_reference_table)
     ui.saveButton.clicked.connect(save_a_reference)
     ui.plus_label.clicked.connect(add_label)
@@ -112,6 +114,14 @@ def save_a_reference():
         populate_reference_table('me')
         ui.newReference.setDisabled(True)
 
+def display_referenced_pdf():
+    s = ui.sender()
+    row = s.currentRow()
+    path = s.item(row,5).text()
+    # print()
+    if(path!=""):
+        subprocess.Popen([''+path], shell=True)
+
 def display_reference():
     ui.newReference.setVisible(True)
     ui.newReference.setDisabled(False)
@@ -185,6 +195,8 @@ def make_new_reference():
 
         if rsp == QtWidgets.QDialog.Accepted:
             path = open_file_name_dialog()
+        else:
+            path = ""
 
         ui.newReference.setProperty("path", path)
         ui.newReference.setProperty("id","0")
@@ -262,6 +274,7 @@ def populate_reference_table(caller):
         ui.reference_table.setItem(rowposition, 2, QTableWidgetItem(i["source"]))
         ui.reference_table.setItem(rowposition, 3, QTableWidgetItem(str(i["timestamp"])))
         ui.reference_table.setItem(rowposition, 4, QTableWidgetItem(str(i["ref_id"])))
+        ui.reference_table.setItem(rowposition, 5, QTableWidgetItem(str(i["file_path"])))
 
 def populate_label_table():
     while(ui.label_table.rowCount()):

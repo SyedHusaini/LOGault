@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>944</width>
-    <height>604</height>
+    <width>937</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -436,11 +436,6 @@
     </column>
     <column>
      <property name="text">
-      <string>Body</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
       <string>Source</string>
      </property>
     </column>
@@ -454,6 +449,16 @@
       <string>refid</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>New Column</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>path</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -461,7 +466,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>944</width>
+     <width>937</width>
      <height>26</height>
     </rect>
    </property>
