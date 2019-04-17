@@ -118,9 +118,9 @@ def display_referenced_pdf():
     s = ui.sender()
     row = s.currentRow()
     path = s.item(row,5).text()
-    # print()
+    print(path)
     if(path!=""):
-        subprocess.Popen([''+path], shell=True)
+        subprocess.Popen([r'evince '+path], shell=True)
 
 def display_reference():
     ui.newReference.setVisible(True)
