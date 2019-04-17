@@ -209,9 +209,10 @@ def make_new_reference():
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
-    name, _ = QFileDialog.getOpenFileName(ui,'','', 'pdf(*.pdf)') #gets pdf files only
-    if name:
-        return name
+    options |= QFileDialog.DontUseNativeDialog
+    fileName, _ = QFileDialog.getOpenFileName(ui,"Choose Resource", "","PDF (*.pdf)", options=options)
+    if fileName:
+        return fileName
 
 def populate_tree():
         # read database

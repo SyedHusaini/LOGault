@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'A:\SEMESTER_6\Software_Engineering\logault\logault.ui'
+# Form implementation generated from reading ui file '/home/hamza/PycharmProjects/logault/logault.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -38,7 +38,7 @@ class Ui_MainWindow(QWidget):
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("icons/bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.delete_reference_button.setIcon(icon1)
-        self.delete_reference_button.setIconSize(QtCore.QSize(30, 30))
+        self.delete_reference_button.setIconSize(QtCore.QSize(25, 25))
         self.delete_reference_button.setObjectName("delete_reference_button")
         self.toolbox.addWidget(self.delete_reference_button)
         self.delete_category_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -54,7 +54,7 @@ class Ui_MainWindow(QWidget):
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("icons/newd.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.new_dir_button.setIcon(icon3)
-        self.new_dir_button.setIconSize(QtCore.QSize(30, 30))
+        self.new_dir_button.setIconSize(QtCore.QSize(25, 25))
         self.new_dir_button.setObjectName("new_dir_button")
         self.toolbox.addWidget(self.new_dir_button)
         self.cat_and_lab_container.addLayout(self.toolbox)
@@ -83,7 +83,7 @@ class Ui_MainWindow(QWidget):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 177, 231))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 177, 232))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.groupBox = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox.setGeometry(QtCore.QRect(0, 0, 181, 221))
@@ -192,7 +192,7 @@ class Ui_MainWindow(QWidget):
         self.reference_table.verticalHeader().setMinimumSectionSize(15)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 937, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 937, 22))
         self.menubar.setObjectName("menubar")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
@@ -289,6 +289,8 @@ class Ui_MainWindow(QWidget):
         self.actionAbout_Us.setText(_translate("MainWindow", "About Us"))
 
 
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -297,4 +299,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
