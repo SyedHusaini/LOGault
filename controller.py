@@ -120,7 +120,7 @@ def display_referenced_pdf():
     path = s.item(row,5).text()
     # print()
     if(path!=""):
-        subprocess.Popen([''+path], shell=True)
+        subprocess.Popen([r''+path], shell=True)
 
 def display_reference():
     ui.newReference.setVisible(True)
