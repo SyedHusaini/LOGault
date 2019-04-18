@@ -14,7 +14,7 @@ class Ui_MainWindow(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(940, 629)
-        MainWindow.setStyleSheet("")
+        MainWindow.setStyleSheet("background-color:slategray; color:white; selection-background-color:rgb(186,189,182)")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
