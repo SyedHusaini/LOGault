@@ -7,6 +7,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget
 from db_handling import connection
 import logault
+import dialog as label_dialog
 from new_reference_DialogBox import Ui_Dialog
 import time, subprocess
 
@@ -29,10 +30,66 @@ def initiate():
     ui.plus_label.clicked.connect(add_label)
     ui.minus_label.clicked.connect(delete_label)
     ui.newReference.setDisabled(True)
+    ui.add_label_button.clicked.connect(open_label_dialog)
     populate_tree()
     populate_label_table()
 
     # getChoice()
+
+def open_label_dialog():
+    # code to display the dialog box for referencing a file
+    Dialog = QtWidgets.QDialog()
+    ui_d = label_dialog.Ui_Dialog();
+    ui_d.setupUi(Dialog)
+
+    ref_id = str(ui.newReference.property("id"))
+
+    cursor = connection.cursor()
+
+    sql = "SELECT `*` FROM `logault`.`label`"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+
+    sql = "SELECT * FROM `logault`.`label` WHERE `lab_id` IN" \
+          "(SELECT `lab_id` FROM `logault`.`reference_label` WHERE `ref_id`="+ref_id+")"
+    cursor.execute(sql)
+    ref_result = cursor.fetchall()
+
+    checklist = []
+    for i in result:
+        chkBoxItem = QTableWidgetItem(i["tag"])
+        chkBoxItem.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+        chkBoxItem.setCheckState(QtCore.Qt.Unchecked)
+        checklist.append(QtCore.Qt.Unchecked)
+        if (ref_result.__contains__(i)):
+            chkBoxItem.setCheckState(QtCore.Qt.Checked)
+            checklist[len(checklist)-1] = QtCore.Qt.Checked
+        rowposition = ui_d.label_table.rowCount()
+        ui_d.label_table.insertRow(rowposition)
+        ui_d.label_table.setItem(rowposition, 0, chkBoxItem)
+        ui_d.label_table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
+
+
+    ui_d.label_table.hideColumn(1)#hiding id row
+    Dialog.show()
+
+    rsp = Dialog.exec_()  # calling exec so dialog window can stay open and rsp stores which button we pressed
+
+    if rsp == QtWidgets.QDialog.Accepted:
+        table = ui_d.label_table
+        rowcount = table.rowCount()
+        for i in range(0, rowcount):
+            if(table.item(i,0).checkState()!=checklist[i]):#if state changed
+                if(checklist[i]==QtCore.Qt.Checked):#label deleted
+                    sql = "DELETE FROM `logault`.`reference_label` WHERE " \
+                          + "(`lab_id` = '"+table.item(i, 1).text()+"') AND (`ref_id` = '"+ ref_id + "')"
+                else:#label added
+                    sql = "INSERT INTO `logault`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
+                          + ref_id + "','" \
+                          + table.item(i, 1).text() + "')"
+                cursor.execute(sql)
+                connection.commit()
 
 def add_label():
     newLabel = getText("New Label", "Label name:")
@@ -65,7 +122,6 @@ def delete_label():
     connection.commit()
     ui.label_table.removeRow(ui.label_table.rowAt(row))
     # populate_label_table()
-
 
 def delete_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "1"):
@@ -134,13 +190,6 @@ def display_reference():
     ui.titleBar.insertPlainText(s.item(row, 0).text())
     ui.bodyBar.insertPlainText(s.item(row, 1).text())
     ui.sourceBar.insertPlainText(s.item(row, 2).text())
-
-    cursor = connection.cursor()
-    sql = "SELECT `tag` FROM `label` WHERE lab_id IN (SELECT lab_id FROM reference_label WHERE ref_id = " + s.item(row, 4).text() + ")"
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    for i in result:
-        ui.labelBar.addItem(i["tag"])
 
 def delete_reference():
     if(ui.reference_table.currentRow()<0):
