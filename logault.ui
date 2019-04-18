@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>937</width>
-    <height>603</height>
+    <width>940</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -174,7 +174,7 @@
           <x>0</x>
           <y>0</y>
           <width>177</width>
-          <height>232</height>
+          <height>233</height>
          </rect>
         </property>
         <widget class="QGroupBox" name="groupBox">
@@ -369,6 +369,12 @@
       <height>511</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="font">
      <font>
       <family>Small Fonts</family>
@@ -466,8 +472,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>937</width>
-     <height>22</height>
+     <width>940</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">

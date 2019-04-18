@@ -201,7 +201,7 @@ def make_new_reference():
         ui.newReference.setProperty("path", path)
         ui.newReference.setProperty("id","0")
         ui.newReference.setVisible(True)
-        ui.newReference.setDisabled(False)
+        ui.newReference.setDisabled(False  )
         ui.titleBar.clear()
         ui.bodyBar.clear()
         ui.sourceBar.clear()
@@ -209,7 +209,7 @@ def make_new_reference():
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog
+    # options |= QFileDialog.DontUseNativeDialog
     fileName, _ = QFileDialog.getOpenFileName(ui,"Choose Resource", "","PDF (*.pdf)", options=options)
     if fileName:
         return fileName
