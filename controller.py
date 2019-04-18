@@ -208,7 +208,6 @@ def display_referenced_pdf():
         subprocess.Popen([r'evince '+path], shell=True)
 
 def display_reference():
-    local_label_dialog = None
     ui.newReference.setVisible(True)
     ui.newReference.setDisabled(False)
     s = ui.sender()

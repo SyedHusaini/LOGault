@@ -14,6 +14,9 @@ class Ui_MainWindow(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(937, 603)
+        MainWindow.setStyleSheet("background-color: slategray;\n"
+"selection-background-color: rgb(186, 189, 182);\n"
+"color: white;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -117,7 +120,7 @@ class Ui_MainWindow(QWidget):
         self.label_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.label_table.setProperty("showDropIndicator", False)
         self.label_table.setDragDropOverwriteMode(False)
-        self.label_table.setAlternatingRowColors(True)
+        self.label_table.setAlternatingRowColors(False)
         self.label_table.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.label_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.label_table.setShowGrid(False)
@@ -149,7 +152,7 @@ class Ui_MainWindow(QWidget):
         self.ref_table_container.setSpacing(1)
         self.ref_table_container.setObjectName("ref_table_container")
         self.ref_box_title = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.ref_box_title.setStyleSheet("background-color : tomato")
+        self.ref_box_title.setStyleSheet("")
         self.ref_box_title.setObjectName("ref_box_title")
         self.ref_table_container.addWidget(self.ref_box_title)
         self.reference_table = QtWidgets.QTableWidget(self.verticalLayoutWidget_2)
@@ -166,7 +169,7 @@ class Ui_MainWindow(QWidget):
         self.reference_table.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.reference_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.reference_table.setDragDropOverwriteMode(False)
-        self.reference_table.setAlternatingRowColors(True)
+        self.reference_table.setAlternatingRowColors(False)
         self.reference_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.reference_table.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.reference_table.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
