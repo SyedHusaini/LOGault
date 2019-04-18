@@ -18,6 +18,11 @@ def initiate():
     ui.category_tree.hideColumn(1)  # hiding category id column
     ui.reference_table.hideColumn(4)# hiding reference id column
     ui.label_table.hideColumn(1)# hiding label id column
+
+
+    ui.actionKhatoni.triggered.connect(Theme_Khatoni)
+
+
     ui.category_tree.clicked.connect(populate_reference_table)
     ui.delete_reference_button.clicked.connect(delete_reference)
     ui.delete_category_button.clicked.connect(delete_category)
@@ -36,6 +41,16 @@ def initiate():
 
     # getChoice()
 
+
+def Theme_Khatoni():
+    ui.reference_table.setStyleSheet("background-color:slategray;color:white")
+    ui.category_tree.setStyleSheet("background-color:slategray;color:white")
+    ui.label_table.setStyleSheet("background-color:slategray;color:white")
+    ui.newReference.setStyleSheet("background-color:slategray;color:white")
+
+
+
+
 def open_label_dialog():
     # code to display the dialog box for referencing a file
     Dialog = QtWidgets.QDialog()
@@ -46,13 +61,13 @@ def open_label_dialog():
 
     cursor = connection.cursor()
 
-    sql = "SELECT `*` FROM `logault`.`label`"
+    sql = "SELECT `*` FROM `logault_final`.`label`"
     cursor.execute(sql)
     result = cursor.fetchall()
 
 
-    sql = "SELECT * FROM `logault`.`label` WHERE `lab_id` IN" \
-          "(SELECT `lab_id` FROM `logault`.`reference_label` WHERE `ref_id`="+ref_id+")"
+    sql = "SELECT * FROM `logault_final`.`label` WHERE `lab_id` IN" \
+          "(SELECT `lab_id` FROM `logault_final`.`reference_label` WHERE `ref_id`="+ref_id+")"
     cursor.execute(sql)
     ref_result = cursor.fetchall()
 
@@ -82,10 +97,10 @@ def open_label_dialog():
         for i in range(0, rowcount):
             if(table.item(i,0).checkState()!=checklist[i]):#if state changed
                 if(checklist[i]==QtCore.Qt.Checked):#label deleted
-                    sql = "DELETE FROM `logault`.`reference_label` WHERE " \
+                    sql = "DELETE FROM `logault_final`.`reference_label` WHERE " \
                           + "(`lab_id` = '"+table.item(i, 1).text()+"') AND (`ref_id` = '"+ ref_id + "')"
                 else:#label added
-                    sql = "INSERT INTO `logault`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
+                    sql = "INSERT INTO `logault_final`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
                           + ref_id + "','" \
                           + table.item(i, 1).text() + "')"
                 cursor.execute(sql)

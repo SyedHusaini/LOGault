@@ -7,11 +7,6 @@
 # '''binds the engine with an object which we'll use to execute SQl scripts and so on...->(Asim_Sansi)'''
 # connection = engine.connect()
 
-
-
-
-
-
 import pymysql
 # Connect to the database
 connection = pymysql.connect(host='localhost',
