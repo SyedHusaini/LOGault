@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
+    <width>259</width>
     <height>125</height>
    </rect>
   </property>
@@ -16,9 +16,9 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>40</x>
      <y>80</y>
-     <width>621</width>
+     <width>171</width>
      <height>32</height>
     </rect>
    </property>
@@ -33,8 +33,8 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
-     <width>591</width>
+     <y>10</y>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -44,7 +44,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Do you want to add a reference file ?</string>
+    <string>Do you wish to link a reference file ?</string>
    </property>
   </widget>
  </widget>

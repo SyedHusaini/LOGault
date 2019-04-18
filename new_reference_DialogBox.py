@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'A:\SEMESTER_6\Software_Engineering\logault\new_reference_DialogBox.ui'
+# Form implementation generated from reading ui file '/home/hamza/PycharmProjects/logault/new_reference_DialogBox.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,14 +13,14 @@ from PyQt5.QtWidgets import QWidget
 class Ui_Dialog(QWidget):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(641, 125)
+        Dialog.resize(259, 125)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(10, 80, 621, 32))
+        self.buttonBox.setGeometry(QtCore.QRect(40, 80, 171, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.label_ref_dialog = QtWidgets.QLabel(Dialog)
-        self.label_ref_dialog.setGeometry(QtCore.QRect(20, 20, 591, 41))
+        self.label_ref_dialog.setGeometry(QtCore.QRect(20, 10, 221, 41))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_ref_dialog.setFont(font)
@@ -34,7 +34,9 @@ class Ui_Dialog(QWidget):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label_ref_dialog.setText(_translate("Dialog", "Do you want to add a reference file ?"))
+        self.label_ref_dialog.setText(_translate("Dialog", "Do you wish to link a reference file ?"))
+
+
 
 
 if __name__ == "__main__":
@@ -45,4 +47,3 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
-

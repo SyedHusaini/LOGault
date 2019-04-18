@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0bdd96c-211a-4166-956e-0a4fe420e946" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/logault.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/logault.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_handling.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_handling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/dialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dialog.ui" beforeDir="false" afterPath="$PROJECT_DIR$/dialog.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logault.py" beforeDir="false" afterPath="$PROJECT_DIR$/logault.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logault.ui" beforeDir="false" afterPath="$PROJECT_DIR$/logault.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_reference_DialogBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/new_reference_DialogBox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_reference_DialogBox.ui" beforeDir="false" afterPath="$PROJECT_DIR$/new_reference_DialogBox.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +36,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="59" column="37" lean-forward="true" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+            <state relative-caret-position="147">
+              <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#1441#2179#0" />
+                <element signature="e#1441#2173#0" />
+                <element signature="e#2199#2520#0" />
+                <element signature="e#2550#2918#0" />
+                <element signature="e#5163#5323#0" />
+                <element signature="e#6677#7091#0" />
+                <element signature="e#6074#6380#0" />
+                <element signature="e#6411#7370#0" />
+                <element signature="e#7406#7541#0" />
+                <element signature="e#7564#7726#0" />
+                <element signature="e#7758#8810#0" />
+                <element signature="e#8845#9067#0" />
+                <element signature="e#9098#10082#0" />
+                <element signature="e#10115#10364#0" />
+                <element signature="e#10408#11762#0" />
+                <element signature="e#11796#12288#0" />
+                <element signature="e#12343#12558#0" />
               </folding>
             </state>
           </provider>
@@ -48,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_handling.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="119">
+              <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -57,31 +73,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/new_reference_DialogBox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state relative-caret-position="307">
+              <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="29" selection-end-column="54" />
               <folding>
-                <element signature="e#255#297#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pdf_handler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dialog.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#238#280#0" expanded="true" />
+                <element signature="e#248#290#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,8 +85,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logault.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
+            <state relative-caret-position="102">
               <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+              <folding>
+                <element signature="e#232#274#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dialog.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+              <folding>
+                <element signature="e#231#273#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,6 +124,7 @@
       <find>cli</find>
       <find>3</find>
       <find>newre</find>
+      <find>DELete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -124,21 +135,22 @@
       <list>
         <option value="$PROJECT_DIR$/Node.py" />
         <option value="$PROJECT_DIR$/category.py" />
+        <option value="$PROJECT_DIR$/db_handling.py" />
         <option value="$PROJECT_DIR$/inputdialog.py" />
+        <option value="$PROJECT_DIR$/pdf_handler.py" />
         <option value="$PROJECT_DIR$/testing.py" />
         <option value="$PROJECT_DIR$/new_reference_DialogBox.py" />
         <option value="$PROJECT_DIR$/dialog.py" />
         <option value="$PROJECT_DIR$/logault.py" />
-        <option value="$PROJECT_DIR$/pdf_handler.py" />
         <option value="$PROJECT_DIR$/controller.py" />
-        <option value="$PROJECT_DIR$/db_handling.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="910" />
-    <option name="width" value="940" />
-    <option name="height" value="1090" />
+    <option name="x" value="49" />
+    <option name="y" value="27" />
+    <option name="width" value="1317" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -146,7 +158,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,12 +168,13 @@
             <path>
               <item name="logault" type="b2602c69:ProjectViewProjectNode" />
               <item name="logault" type="462c0819:PsiDirectoryNode" />
-              <item name="icons" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,9 +346,8 @@
       <workItem from="1554138673105" duration="12000" />
       <workItem from="1554283396384" duration="2004000" />
       <workItem from="1554987010324" duration="345000" />
-      <workItem from="1555425186147" duration="26505000" />
-      <workItem from="1555535070257" duration="640000" />
-      <workItem from="1555587083748" duration="3347000" />
+      <workItem from="1555425186147" duration="23770000" />
+      <workItem from="1555505220684" duration="18548000" />
     </task>
     <task id="LOCAL-00001" summary="category class is created">
       <created>1553957872566</created>
@@ -422,37 +433,30 @@
       <option name="project" value="LOCAL" />
       <updated>1555500929764</updated>
     </task>
-    <task id="LOCAL-00013" summary="Allah Khair kary">
-      <created>1555504883561</created>
+    <task id="LOCAL-00013" summary="corrected icons">
+      <created>1555507282845</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1555504883561</updated>
+      <updated>1555507282845</updated>
     </task>
-    <task id="LOCAL-00014" summary="Allah Khair kary">
-      <created>1555507348523</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1555507348523</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104550000" />
+    <option name="totallyTimeSpent" value="116376000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1487" height="878" extended-state="6" />
+    <frame x="49" y="27" width="1317" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15255423" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15027538" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32931727" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3266399" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39892906" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3256579" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39802632" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -501,13 +505,14 @@
     <MESSAGE value="gui inserted" />
     <MESSAGE value="gui inserted categories populated" />
     <MESSAGE value="Allah Khair kary" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allah Khair kary" />
+    <MESSAGE value="corrected icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected icons" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/logault$db_handling.coverage" NAME="db_handling Coverage Results" MODIFIED="1555597823369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/logault$testing.coverage" NAME="testing Coverage Results" MODIFIED="1555451893035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/logault$logault.coverage" NAME="logault Coverage Results" MODIFIED="1555451271359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/logault$dialog.coverage" NAME="dialog Coverage Results" MODIFIED="1555451836072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/logault$db_handling.coverage" NAME="db_handling Coverage Results" MODIFIED="1555587390719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/logault$testing.coverage" NAME="testing Coverage Results" MODIFIED="1555451893035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/logault$pdf_handler.coverage" NAME="pdf_handler Coverage Results" MODIFIED="1555448979230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
@@ -527,83 +532,83 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/exec.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="311" selection-start-line="311" selection-end-line="311" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/err.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="108" selection-start-line="108" selection-end-line="108" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/err.py" />
     <entry file="file://$PROJECT_DIR$/inputdialog.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/PyPDF2/pdf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20059">
-          <caret line="1688" selection-start-line="1688" selection-end-line="1688" />
-        </state>
-      </provider>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/PyPDF2/pdf.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/subprocess.py" />
+    <entry file="file://$PROJECT_DIR$/icons/reference.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/subprocess.py">
+    <entry file="file://$PROJECT_DIR$/pdf_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="768" selection-start-line="768" selection-end-line="768" />
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#2#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/new_reference_DialogBox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        <state relative-caret-position="307">
+          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="29" selection-end-column="54" />
           <folding>
-            <element signature="e#255#297#0" expanded="true" />
+            <element signature="e#248#290#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdf_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dialog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="170">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding>
-            <element signature="e#238#280#0" expanded="true" />
+            <element signature="e#231#273#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/logault.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
+        <state relative-caret-position="102">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding>
+            <element signature="e#232#274#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db_handling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        <state relative-caret-position="119">
+          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="59" column="37" lean-forward="true" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+        <state relative-caret-position="147">
+          <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#1441#2179#0" />
+            <element signature="e#1441#2173#0" />
+            <element signature="e#2199#2520#0" />
+            <element signature="e#2550#2918#0" />
+            <element signature="e#5163#5323#0" />
+            <element signature="e#6677#7091#0" />
+            <element signature="e#6074#6380#0" />
+            <element signature="e#6411#7370#0" />
+            <element signature="e#7406#7541#0" />
+            <element signature="e#7564#7726#0" />
+            <element signature="e#7758#8810#0" />
+            <element signature="e#8845#9067#0" />
+            <element signature="e#9098#10082#0" />
+            <element signature="e#10115#10364#0" />
+            <element signature="e#10408#11762#0" />
+            <element signature="e#11796#12288#0" />
+            <element signature="e#12343#12558#0" />
           </folding>
         </state>
       </provider>
