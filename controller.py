@@ -12,10 +12,29 @@ from new_reference_DialogBox import Ui_Dialog
 import time, subprocess
 
 
+class Local_Label_Dialog:
+    Dialog = None
+    checklist = []
+    dialog = None
+    rsp = 0
+    outdate_check = False
+
+    def __init__(self):
+        self.Dialog = QtWidgets.QDialog()
+        self.dialog = label_dialog.Ui_Dialog()
+        self.dialog.setupUi(self.Dialog)
+
+    def reset(self):
+        self.outdate_check = False
+        self.rsp = 0
+        self.checklist.clear()
+        while(self.dialog.label_table.rowCount()):
+            self.dialog.label_table.removeRow(0)
+
 
 def initiate():
     ui.reference_table.hideColumn(5)# hiding the path of the file
-    ui.category_tree.hideColumn(1)  # hiding category id column
+    ui.category_tree.hideColumn(1)# hiding category id column
     ui.reference_table.hideColumn(4)# hiding reference id column
     ui.label_table.hideColumn(1)# hiding label id column
     ui.category_tree.clicked.connect(populate_reference_table)
@@ -36,12 +55,27 @@ def initiate():
 
     # getChoice()
 
-def open_label_dialog():
-    # code to display the dialog box for referencing a file
-    Dialog = QtWidgets.QDialog()
-    ui_d = label_dialog.Ui_Dialog();
-    ui_d.setupUi(Dialog)
+def update_labels(ref_id):
+    local_label_dialog.outdate_check = True
+    if local_label_dialog.rsp == QtWidgets.QDialog.Accepted:
+        table = local_label_dialog.dialog.label_table
+        rowcount = table.rowCount()
+        cursor = connection.cursor()
+        for i in range(0, rowcount):
+            if(table.item(i,0).checkState()!=local_label_dialog.checklist[i]):#if state changed
+                if(local_label_dialog.checklist[i]==QtCore.Qt.Checked):#label deleted
+                    sql = "DELETE FROM `logault`.`reference_label` WHERE " \
+                          + "(`lab_id` = '"+table.item(i, 1).text()+"') AND (`ref_id` = '"+ ref_id + "')"
+                else:#label added
+                    sql = "INSERT INTO `logault`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
+                          + ref_id + "','" \
+                          + table.item(i, 1).text() + "')"
+                cursor.execute(sql)
+                connection.commit()
 
+def open_label_dialog():
+    local_label_dialog.reset()
+    # code to display the dialog box for label
     ref_id = str(ui.newReference.property("id"))
 
     cursor = connection.cursor()
@@ -56,40 +90,25 @@ def open_label_dialog():
     cursor.execute(sql)
     ref_result = cursor.fetchall()
 
-    checklist = []
+    local_label_dialog.dialog.label_table
     for i in result:
         chkBoxItem = QTableWidgetItem(i["tag"])
         chkBoxItem.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
         chkBoxItem.setCheckState(QtCore.Qt.Unchecked)
-        checklist.append(QtCore.Qt.Unchecked)
+        local_label_dialog.checklist.append(QtCore.Qt.Unchecked)
         if (ref_result.__contains__(i)):
             chkBoxItem.setCheckState(QtCore.Qt.Checked)
-            checklist[len(checklist)-1] = QtCore.Qt.Checked
-        rowposition = ui_d.label_table.rowCount()
-        ui_d.label_table.insertRow(rowposition)
-        ui_d.label_table.setItem(rowposition, 0, chkBoxItem)
-        ui_d.label_table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
+            local_label_dialog.checklist[len(local_label_dialog.checklist)-1] = QtCore.Qt.Checked
+        rowposition = local_label_dialog.dialog.label_table.rowCount()
+        local_label_dialog.dialog.label_table.insertRow(rowposition)
+        local_label_dialog.dialog.label_table.setItem(rowposition, 0, chkBoxItem)
+        local_label_dialog.dialog.label_table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
 
 
-    ui_d.label_table.hideColumn(1)#hiding id row
-    Dialog.show()
+    local_label_dialog.dialog.label_table.hideColumn(1)#hiding id row
+    local_label_dialog.Dialog.show()
 
-    rsp = Dialog.exec_()  # calling exec so dialog window can stay open and rsp stores which button we pressed
-
-    if rsp == QtWidgets.QDialog.Accepted:
-        table = ui_d.label_table
-        rowcount = table.rowCount()
-        for i in range(0, rowcount):
-            if(table.item(i,0).checkState()!=checklist[i]):#if state changed
-                if(checklist[i]==QtCore.Qt.Checked):#label deleted
-                    sql = "DELETE FROM `logault`.`reference_label` WHERE " \
-                          + "(`lab_id` = '"+table.item(i, 1).text()+"') AND (`ref_id` = '"+ ref_id + "')"
-                else:#label added
-                    sql = "INSERT INTO `logault`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
-                          + ref_id + "','" \
-                          + table.item(i, 1).text() + "')"
-                cursor.execute(sql)
-                connection.commit()
+    local_label_dialog.rsp = local_label_dialog.Dialog.exec_()  # calling exec so dialog window can stay open and rsp stores which button we pressed
 
 def add_label():
     newLabel = getText("New Label", "Label name:")
@@ -137,7 +156,7 @@ def save_a_reference():
     id = ui.newReference.property("id")
     if(len(ui.bodyBar.toPlainText())==0):
         gen_msg_box(QMessageBox.Warning, "Reference must have a body", "Type in text for reference body to proceed","Error 777: Invalid Reference")
-        return;
+        return
     if(id!="0"):#editing a reference
         ui.newReference.setWindowTitle("Reference Editor")
         cursor = connection.cursor()
@@ -149,6 +168,8 @@ def save_a_reference():
         # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
+        if not(local_label_dialog.outdate_check):
+            update_labels(id)
         # ui.newReference.setProperty("id", "0")
     elif(id=="0"):
         if(ui.category_tree.currentItem().text(0)=="Recent"):
@@ -164,6 +185,13 @@ def save_a_reference():
         # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
+
+        sql = "SELECT MAX(ref_id) AS 'id' FROM `logault`.`reference`"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        if not(local_label_dialog.outdate_check):
+            update_labels(str(result['id']))
+
         ui.titleBar.clear()
         ui.bodyBar.clear()
         ui.sourceBar.clear()
@@ -179,6 +207,7 @@ def display_referenced_pdf():
         subprocess.Popen([r'evince '+path], shell=True)
 
 def display_reference():
+    local_label_dialog = None
     ui.newReference.setVisible(True)
     ui.newReference.setDisabled(False)
     s = ui.sender()
@@ -357,4 +386,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     initiate()
     MainWindow.show()
+    local_label_dialog = Local_Label_Dialog()
     sys.exit(app.exec_())
