@@ -195,6 +195,7 @@ def save_a_reference():
         ui.titleBar.clear()
         ui.bodyBar.clear()
         ui.sourceBar.clear()
+        print('')
         populate_reference_table('me')
         ui.newReference.setDisabled(True)
 
