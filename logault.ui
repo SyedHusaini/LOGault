@@ -6,23 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>940</width>
-    <height>629</height>
+    <width>937</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: slategray;
+   <string notr="true">/*background-color: slategray;
 selection-background-color: rgb(186, 189, 182);
-color: white;</string>
+color: white;*/</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_10">
     <item>
      <layout class="QVBoxLayout" name="cat_and_lab_container">
       <property name="spacing">
@@ -117,9 +114,6 @@ color: white;</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color : skyblue</string>
-        </property>
         <property name="text">
          <string>LogAult</string>
         </property>
@@ -132,25 +126,18 @@ color: white;</string>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="placeholderText">
-         <string>Search your library...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QTreeWidget" name="category_tree">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
         </property>
         <property name="mouseTracking">
          <bool>true</bool>
@@ -196,9 +183,6 @@ color: white;</string>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="spacing">
-         <number>2</number>
-        </property>
         <item>
          <widget class="QLabel" name="label_2">
           <property name="sizePolicy">
@@ -206,11 +190,6 @@ color: white;</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>11</pointsize>
-           </font>
           </property>
           <property name="text">
            <string>Labels</string>
@@ -224,6 +203,12 @@ color: white;</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="text">
            <string>...</string>
@@ -241,6 +226,15 @@ color: white;</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>...</string>
@@ -267,14 +261,11 @@ color: white;</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>9</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <underline>false</underline>
-         </font>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
         </property>
         <property name="mouseTracking">
          <bool>true</bool>
@@ -325,13 +316,13 @@ color: white;</string>
          <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderDefaultSectionSize">
-         <number>20</number>
+         <number>10</number>
         </attribute>
         <attribute name="verticalHeaderHighlightSections">
          <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderMinimumSectionSize">
-         <number>20</number>
+         <number>10</number>
         </attribute>
         <column>
          <property name="text">
@@ -361,12 +352,56 @@ color: white;</string>
       <item>
        <widget class="QLabel" name="ref_box_title">
         <property name="styleSheet">
-         <string notr="true">background-color : tomato</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;p&gt;&lt;img src=&quot;icons/reference.png&quot; width=&quot;25&quot; height=&quot;25&quot;/&gt;&lt;/p&gt;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;References&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="search_bar">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="placeholderText">
+           <string>Search your library...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="date_search">
+          <property name="maximumDate">
+           <date>
+            <year>2030</year>
+            <month>12</month>
+            <day>31</day>
+           </date>
+          </property>
+          <property name="minimumDate">
+           <date>
+            <year>2019</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QTableWidget" name="reference_table">
@@ -410,13 +445,13 @@ color: white;</string>
          <bool>true</bool>
         </attribute>
         <attribute name="horizontalHeaderCascadingSectionResizes">
-         <bool>false</bool>
+         <bool>true</bool>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>100</number>
+         <number>110</number>
         </attribute>
         <attribute name="horizontalHeaderHighlightSections">
-         <bool>false</bool>
+         <bool>true</bool>
         </attribute>
         <attribute name="horizontalHeaderMinimumSectionSize">
          <number>15</number>
@@ -477,8 +512,8 @@ color: white;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>940</width>
-     <height>26</height>
+     <width>937</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">

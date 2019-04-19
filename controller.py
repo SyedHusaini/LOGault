@@ -31,7 +31,6 @@ class Local_Label_Dialog:
         while(self.dialog.label_table.rowCount()):
             self.dialog.label_table.removeRow(0)
 
-
 def initiate():
     ui.reference_table.hideColumn(5)# hiding the path of the file
     ui.category_tree.hideColumn(1)# hiding category id column
@@ -55,10 +54,19 @@ def initiate():
     ui.minus_label.clicked.connect(delete_label)
     ui.newReference.setDisabled(True)
     ui.add_label_button.clicked.connect(open_label_dialog)
+    ui.search_bar.textChanged.connect(search_references)
+    ui.date_search.userDateChanged['QDate'].connect(search_references)
     populate_tree()
     populate_label_table()
 
     # getChoice()
+
+def search_references():
+    s = ui.sender()
+    if(s.objectName()=="search_bar"):
+        populate_reference_table("search_bar")
+    else:
+        populate_reference_table("date_search")
 
 def update_labels(ref_id):
     local_label_dialog.outdate_check = True
@@ -78,15 +86,11 @@ def update_labels(ref_id):
                 cursor.execute(sql)
                 connection.commit()
 
-
 def Theme_Khatoni():
     ui.reference_table.setStyleSheet("background-color:slategray;color:white")
     ui.category_tree.setStyleSheet("background-color:slategray;color:white")
     ui.label_table.setStyleSheet("background-color:slategray;color:white")
     ui.newReference.setStyleSheet("background-color:slategray;color:white")
-
-
-
 
 def open_label_dialog():
     local_label_dialog.reset()
@@ -95,13 +99,13 @@ def open_label_dialog():
 
     cursor = connection.cursor()
 
-    sql = "SELECT `*` FROM `logault_final`.`label`"
+    sql = "SELECT `*` FROM `logault`.`label`"
     cursor.execute(sql)
     result = cursor.fetchall()
 
 
-    sql = "SELECT * FROM `logault_final`.`label` WHERE `lab_id` IN" \
-          "(SELECT `lab_id` FROM `logault_final`.`reference_label` WHERE `ref_id`="+ref_id+")"
+    sql = "SELECT * FROM `logault`.`label` WHERE `lab_id` IN" \
+          "(SELECT `lab_id` FROM `logault`.`reference_label` WHERE `ref_id`="+ref_id+")"
     cursor.execute(sql)
     ref_result = cursor.fetchall()
 
@@ -142,7 +146,7 @@ def add_label():
                 break;
 
     cursor = connection.cursor()
-    sql = "INSERT INTO `logault_final`.`label` (`tag`) VALUES ('"+newLabel+"')"
+    sql = "INSERT INTO `logault`.`label` (`tag`) VALUES ('"+newLabel+"')"
     cursor.execute(sql)
     connection.commit()
     populate_label_table()
@@ -151,7 +155,7 @@ def delete_label():
     row = ui.label_table.currentRow()
     lab_id = ui.label_table.item(row, 1).text()
     cursor = connection.cursor()
-    sql = "DELETE FROM `logault_final`.`label` WHERE (`lab_id` = '"+lab_id+"')"
+    sql = "DELETE FROM `logault`.`label` WHERE (`lab_id` = '"+lab_id+"')"
     cursor.execute(sql)
     connection.commit()
     ui.label_table.removeRow(ui.label_table.rowAt(row))
@@ -161,7 +165,7 @@ def delete_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "1"):
         return
     cursor = connection.cursor()
-    sql = "DELETE FROM `logault_final`.`category` WHERE (`cat_id` = '"+ui.category_tree.currentItem().text(1)+"')"
+    sql = "DELETE FROM `logault`.`category` WHERE (`cat_id` = '"+ui.category_tree.currentItem().text(1)+"')"
     cursor.execute(sql)
     connection.commit()
     populate_tree()
@@ -175,12 +179,12 @@ def save_a_reference():
     if(id!="0"):#editing a reference
         ui.newReference.setWindowTitle("Reference Editor")
         cursor = connection.cursor()
-        sql = "UPDATE `logault_final`.`reference` SET `title` = '" + ui.titleBar.toPlainText()+\
+        sql = "UPDATE `logault`.`reference` SET `title` = '" + ui.titleBar.toPlainText()+\
               "',`body` = '"+ui.bodyBar.toPlainText()+\
               "',`source` = '"+ui.sourceBar.toPlainText()+\
               "',`timestamp` = '"+time.strftime('%Y-%m-%d %H:%M:%S')+\
               "'  WHERE (`ref_id` = '"+ id + "')"
-        # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
+        # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
         if not(local_label_dialog.outdate_check):
@@ -191,17 +195,17 @@ def save_a_reference():
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
             return
         cursor = connection.cursor()
-        sql = "INSERT INTO `logault_final`.`reference` (`body`, `title`, `source`, `file_path`, `cat_id`) VALUES ('"\
+        sql = "INSERT INTO `logault`.`reference` (`body`, `title`, `source`, `file_path`, `cat_id`) VALUES ('"\
               +ui.bodyBar.toPlainText()+"','"\
               +ui.titleBar.toPlainText() + "','"\
               +ui.sourceBar.toPlainText() + "','"\
               +path + "','"\
               +ui.category_tree.currentItem().text(1) + "')"
-        # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
+        # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
 
-        sql = "SELECT MAX(ref_id) AS 'id' FROM `logault_final`.`reference`"
+        sql = "SELECT MAX(ref_id) AS 'id' FROM `logault`.`reference`"
         cursor.execute(sql)
         result = cursor.fetchone()
         if not(local_label_dialog.outdate_check):
@@ -239,7 +243,7 @@ def delete_reference():
     if(ui.reference_table.currentRow()<0):
         return
     cursor = connection.cursor()
-    sql = "DELETE FROM `logault_final`.`reference` WHERE (`ref_id` = '"+ui.reference_table.item(ui.reference_table.currentRow(),4).text()+"')"
+    sql = "DELETE FROM `logault`.`reference` WHERE (`ref_id` = '"+ui.reference_table.item(ui.reference_table.currentRow(),4).text()+"')"
     cursor.execute(sql)
     connection.commit()
     populate_reference_table('me')
@@ -257,7 +261,7 @@ def make_new_category():
             i=0
     else:
         cursor = connection.cursor()
-        sql = "INSERT INTO `logault_final`.`category` (`title`, `parent_cat`) VALUES ('"+newTitle+"', '"+selected_folder.text(1)+"')"
+        sql = "INSERT INTO `logault`.`category` (`title`, `parent_cat`) VALUES ('"+newTitle+"', '"+selected_folder.text(1)+"')"
         cursor.execute(sql)
         connection.commit()
         populate_tree()
@@ -302,7 +306,7 @@ def make_new_reference():
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
-    # options |= QFileDialog.DontUseNativeDialog
+    options |= QFileDialog.DontUseNativeDialog
     fileName, _ = QFileDialog.getOpenFileName(ui,"Choose Resource", "","PDF (*.pdf)", options=options)
     if fileName:
         return fileName
@@ -349,7 +353,43 @@ def populate_reference_table(caller):
         ui.reference_table.removeRow(ui.reference_table.rowAt(0))
     if(caller=='me'):
         s = ui.category_tree
+        if(s.currentItem()== None):
+            return
         sql = "SELECT `*` FROM `reference` WHERE cat_id=" + s.currentItem().text(1)
+    elif(caller=="search_bar"):
+        s = ui.search_bar
+        phrase = s.text()
+        if (phrase == ""):
+            populate_reference_table("me")
+            return
+        else:
+            if (phrase[0] == '!'):
+                if(len(phrase)<3):
+                    return
+
+                param = phrase[1]
+                i=2
+                only_selected_category = ""
+                if(phrase[2]=='!' and ui.category_tree.currentItem()!=None):
+                    i = 3
+                    only_selected_category = "AND `cat_id` = " + ui.category_tree.currentItem().text(1)
+                if(param == 'b'):
+                    sql = "SELECT `*` FROM `reference` WHERE `body` LIKE('%" + phrase[i:] + "%')"
+                elif(param == 't'):
+                    sql = "SELECT `*` FROM `reference` WHERE `title` LIKE('%" + phrase[i:] + "%')"
+                elif(param == 's'):
+                    sql = "SELECT `*` FROM `reference` WHERE `source` LIKE('%" + phrase[i:] + "%')"
+                else:
+                    return
+                sql += only_selected_category
+
+            else:
+                sql = "SELECT `*` FROM `reference` WHERE `title` LIKE('%"+phrase+"%') OR `body` LIKE('%"+phrase+"%')"
+
+    elif(caller == "date_search"):
+        phrase = ui.date_search.text()
+        sql = "SELECT `*` FROM `reference` WHERE `timestamp` LIKE('" + phrase + "%')"
+
     else:
         s = ui.sender()
         if(s.objectName()=="label_table"):
