@@ -10,7 +10,7 @@ import logault
 import dialog as label_dialog
 from new_reference_DialogBox import Ui_Dialog
 import time, subprocess
-
+from form import Ui_Form
 
 class Local_Label_Dialog:
     Dialog = None
@@ -37,11 +37,11 @@ def initiate():
     ui.category_tree.hideColumn(1)# hiding category id column
     ui.reference_table.hideColumn(4)# hiding reference id column
     ui.label_table.hideColumn(1)# hiding label id column
-
-
+    #Asim Sansi
     ui.actionKhatoni.triggered.connect(Theme_Khatoni)
-
-
+    ui.tabWidget.removeTab(1)  # for removing the 2nd tab which was made by default
+    ui.tabWidget.tabCloseRequested.connect(remove_tab)
+    #--
     ui.category_tree.clicked.connect(populate_reference_table)
     ui.delete_reference_button.clicked.connect(delete_reference)
     ui.delete_category_button.clicked.connect(delete_category)
@@ -60,6 +60,11 @@ def initiate():
 
     # getChoice()
 
+def remove_tab():
+    if(ui.tabWidget.currentIndex()!=0):
+        ui.tabWidget.removeTab(ui.tabWidget.currentIndex())
+
+
 def update_labels(ref_id):
     local_label_dialog.outdate_check = True
     if local_label_dialog.rsp == QtWidgets.QDialog.Accepted:
@@ -69,10 +74,10 @@ def update_labels(ref_id):
         for i in range(0, rowcount):
             if(table.item(i,0).checkState()!=local_label_dialog.checklist[i]):#if state changed
                 if(local_label_dialog.checklist[i]==QtCore.Qt.Checked):#label deleted
-                    sql = "DELETE FROM `logault`.`reference_label` WHERE " \
+                    sql = "DELETE FROM `logault_final`.`reference_label` WHERE " \
                           + "(`lab_id` = '"+table.item(i, 1).text()+"') AND (`ref_id` = '"+ ref_id + "')"
                 else:#label added
-                    sql = "INSERT INTO `logault`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
+                    sql = "INSERT INTO `logault_final`.`reference_label` (`ref_id`, `lab_id`) VALUES ('" \
                           + ref_id + "','" \
                           + table.item(i, 1).text() + "')"
                 cursor.execute(sql)
@@ -218,6 +223,12 @@ def display_referenced_pdf():
     s = ui.sender()
     row = s.currentRow()
     path = s.item(row,5).text()
+    Form = QWidget()
+    ui_pdf = Ui_Form()
+    ui_pdf.setupUi(Form)
+    ui.tabWidget.addTab(Form, "PDF")
+    ui.tabWidget.setCurrentIndex(ui.tabWidget.count()-1)
+
     # print()
     if(path!=""):
         subprocess.Popen([r''+path], shell=True)
