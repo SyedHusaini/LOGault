@@ -1,16 +1,14 @@
 from builtins import print
 
 from PyQt5 import QtGui
-from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit, QFileDialog
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtWebEngineWidgets
 from PyQt5.QtWidgets import QWidget
 from db_handling import connection
 import logault
 import dialog as label_dialog
 from new_reference_DialogBox import Ui_Dialog
 import time, subprocess
-
 
 class Local_Label_Dialog:
     Dialog = None
@@ -58,8 +56,6 @@ def initiate():
     ui.date_search.userDateChanged['QDate'].connect(search_references)
     populate_tree()
     populate_label_table()
-
-    # getChoice()
 
 def search_references():
     s = ui.sender()
@@ -159,7 +155,6 @@ def delete_label():
     cursor.execute(sql)
     connection.commit()
     ui.label_table.removeRow(ui.label_table.rowAt(row))
-    # populate_label_table()
 
 def delete_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "1"):
@@ -184,13 +179,11 @@ def save_a_reference():
               "',`source` = '"+ui.sourceBar.toPlainText()+\
               "',`timestamp` = '"+time.strftime('%Y-%m-%d %H:%M:%S')+\
               "'  WHERE (`ref_id` = '"+ id + "')"
-        # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
         if not(local_label_dialog.outdate_check):
             update_labels(id)
-        # ui.newReference.setProperty("id", "0")
-    elif(id=="0"):
+    elif(id=="0"):#making a new reference
         if(ui.category_tree.currentItem().text(0)=="Recent"):
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
             return
@@ -201,7 +194,6 @@ def save_a_reference():
               +ui.sourceBar.toPlainText() + "','"\
               +path + "','"\
               +ui.category_tree.currentItem().text(1) + "')"
-        # sql = "UPDATE `logault`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
 
@@ -211,12 +203,18 @@ def save_a_reference():
         if not(local_label_dialog.outdate_check):
             update_labels(str(result['id']))
 
-        ui.titleBar.clear()
-        ui.bodyBar.clear()
-        ui.sourceBar.clear()
-        print('')
         populate_reference_table('me')
+        reset_reference_editor()
         ui.newReference.setDisabled(True)
+
+def reset_reference_editor():
+    ui.newReference.setWindowTitle("Reference Editor")
+    ui.titleBar.clear()
+    ui.bodyBar.clear()
+    ui.sourceBar.clear()
+    ui.newReference.setProperty("path", "")
+    ui.newReference.setProperty("id", "0")
+
 
 def display_referenced_pdf():
     s = ui.sender()
@@ -231,13 +229,13 @@ def display_reference():
     ui.newReference.setDisabled(False)
     s = ui.sender()
     row = s.currentRow()
-    ui.titleBar.clear()
-    ui.bodyBar.clear()
-    ui.sourceBar.clear()
+    reset_reference_editor()
     ui.newReference.setProperty("id", s.item(row, 4).text())
+    ui.newReference.setProperty("path",s.item(row, 5).text())
     ui.titleBar.insertPlainText(s.item(row, 0).text())
     ui.bodyBar.insertPlainText(s.item(row, 1).text())
     ui.sourceBar.insertPlainText(s.item(row, 2).text())
+    ui.titleBar.setFocus()
 
 def delete_reference():
     if(ui.reference_table.currentRow()<0):
@@ -246,7 +244,9 @@ def delete_reference():
     sql = "DELETE FROM `logault`.`reference` WHERE (`ref_id` = '"+ui.reference_table.item(ui.reference_table.currentRow(),4).text()+"')"
     cursor.execute(sql)
     connection.commit()
-    populate_reference_table('me')
+    reset_reference_editor()
+    ui.newReference.setDisabled(True)
+    ui.reference_table.removeRow(ui.reference_table.currentRow())
 
 def make_new_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(0) == "Recent"):
@@ -271,12 +271,6 @@ def getText(wintitle, label):
     if okPressed and text != '':
         return (text)
 
-def getChoice():
-    items = ("Red","Blue","Green")
-    item, okPressed = QInputDialog.getItem(ui, "Get item","Color:", items, 0, False)
-    if okPressed and item:
-        print(item)
-
 def make_new_reference():
     if (ui.category_tree.currentItem()==None or ui.category_tree.currentItem().text(0)=="Recent"):
         gen_msg_box(QMessageBox.Warning,"You have not selected a category","Select an appropriate category to proceed","Error 404: Invalid Category")
@@ -295,14 +289,12 @@ def make_new_reference():
         else:
             path = ""
 
+        reset_reference_editor()
         ui.newReference.setProperty("path", path)
-        ui.newReference.setProperty("id","0")
         ui.newReference.setVisible(True)
-        ui.newReference.setDisabled(False  )
-        ui.titleBar.clear()
-        ui.bodyBar.clear()
-        ui.sourceBar.clear()
+        ui.newReference.setDisabled(False)
         ui.newReference.setWindowTitle("New Reference")
+        ui.titleBar.setFocus()
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
