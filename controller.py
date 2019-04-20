@@ -3,7 +3,7 @@ from builtins import print
 from PyQt5 import QtGui
 from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit, QFileDialog
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtWebEngineWidgets
 from PyQt5.QtWidgets import QWidget
 from db_handling import connection
 import logault
@@ -55,10 +55,17 @@ def initiate():
     ui.minus_label.clicked.connect(delete_label)
     ui.newReference.setDisabled(True)
     ui.add_label_button.clicked.connect(open_label_dialog)
+    ui.search_bar.textChanged.connect(search_references)
+    ui.date_search.userDateChanged['QDate'].connect(search_references)
     populate_tree()
     populate_label_table()
 
-    # getChoice()
+def search_references():
+    s = ui.sender()
+    if(s.objectName()=="search_bar"):
+        populate_reference_table("search_bar")
+    else:
+        populate_reference_table("date_search")
 
 def remove_tab():
     if(ui.tabWidget.currentIndex()!=0):
@@ -89,9 +96,6 @@ def Theme_Khatoni():
     ui.category_tree.setStyleSheet("background-color:slategray;color:white")
     ui.label_table.setStyleSheet("background-color:slategray;color:white")
     ui.newReference.setStyleSheet("background-color:slategray;color:white")
-
-
-
 
 def open_label_dialog():
     local_label_dialog.reset()
@@ -160,7 +164,6 @@ def delete_label():
     cursor.execute(sql)
     connection.commit()
     ui.label_table.removeRow(ui.label_table.rowAt(row))
-    # populate_label_table()
 
 def delete_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(1) == "-1" or ui.category_tree.currentItem().text(1) == "1"):
@@ -185,13 +188,11 @@ def save_a_reference():
               "',`source` = '"+ui.sourceBar.toPlainText()+\
               "',`timestamp` = '"+time.strftime('%Y-%m-%d %H:%M:%S')+\
               "'  WHERE (`ref_id` = '"+ id + "')"
-        # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
         if not(local_label_dialog.outdate_check):
             update_labels(id)
-        # ui.newReference.setProperty("id", "0")
-    elif(id=="0"):
+    elif(id=="0"):#making a new reference
         if(ui.category_tree.currentItem().text(0)=="Recent"):
             gen_msg_box(QMessageBox.Warning, "Invalid Category", "Choose appropriate category","Error 404: Invalid Category")
             return
@@ -202,7 +203,6 @@ def save_a_reference():
               +ui.sourceBar.toPlainText() + "','"\
               +path + "','"\
               +ui.category_tree.currentItem().text(1) + "')"
-        # sql = "UPDATE `logault_final`.`reference` SET `body` = 'kiun zayan kar bano sody faramosh rahon fikr-e-farda na karon or hamma tan gosh rahon.', `title` = 'aaa', `timestamp` = '2019-04-31 13:55:28', `source` = 'shikwa' WHERE (`ref_id` = '2')"
         cursor.execute(sql)
         connection.commit()
 
@@ -212,12 +212,18 @@ def save_a_reference():
         if not(local_label_dialog.outdate_check):
             update_labels(str(result['id']))
 
-        ui.titleBar.clear()
-        ui.bodyBar.clear()
-        ui.sourceBar.clear()
-        print('')
         populate_reference_table('me')
+        reset_reference_editor()
         ui.newReference.setDisabled(True)
+
+def reset_reference_editor():
+    ui.newReference.setWindowTitle("Reference Editor")
+    ui.titleBar.clear()
+    ui.bodyBar.clear()
+    ui.sourceBar.clear()
+    ui.newReference.setProperty("path", "")
+    ui.newReference.setProperty("id", "0")
+
 
 def display_referenced_pdf():
     s = ui.sender()
@@ -234,18 +240,17 @@ def display_referenced_pdf():
         subprocess.Popen([r''+path], shell=True)
 
 def display_reference():
-    local_label_dialog = None
     ui.newReference.setVisible(True)
     ui.newReference.setDisabled(False)
     s = ui.sender()
     row = s.currentRow()
-    ui.titleBar.clear()
-    ui.bodyBar.clear()
-    ui.sourceBar.clear()
+    reset_reference_editor()
     ui.newReference.setProperty("id", s.item(row, 4).text())
+    ui.newReference.setProperty("path",s.item(row, 5).text())
     ui.titleBar.insertPlainText(s.item(row, 0).text())
     ui.bodyBar.insertPlainText(s.item(row, 1).text())
     ui.sourceBar.insertPlainText(s.item(row, 2).text())
+    ui.titleBar.setFocus()
 
 def delete_reference():
     if(ui.reference_table.currentRow()<0):
@@ -254,7 +259,9 @@ def delete_reference():
     sql = "DELETE FROM `logault_final`.`reference` WHERE (`ref_id` = '"+ui.reference_table.item(ui.reference_table.currentRow(),4).text()+"')"
     cursor.execute(sql)
     connection.commit()
-    populate_reference_table('me')
+    reset_reference_editor()
+    ui.newReference.setDisabled(True)
+    ui.reference_table.removeRow(ui.reference_table.currentRow())
 
 def make_new_category():
     if (ui.category_tree.currentItem() == None or ui.category_tree.currentItem().text(0) == "Recent"):
@@ -279,12 +286,6 @@ def getText(wintitle, label):
     if okPressed and text != '':
         return (text)
 
-def getChoice():
-    items = ("Red","Blue","Green")
-    item, okPressed = QInputDialog.getItem(ui, "Get item","Color:", items, 0, False)
-    if okPressed and item:
-        print(item)
-
 def make_new_reference():
     if (ui.category_tree.currentItem()==None or ui.category_tree.currentItem().text(0)=="Recent"):
         gen_msg_box(QMessageBox.Warning,"You have not selected a category","Select an appropriate category to proceed","Error 404: Invalid Category")
@@ -303,14 +304,12 @@ def make_new_reference():
         else:
             path = ""
 
+        reset_reference_editor()
         ui.newReference.setProperty("path", path)
-        ui.newReference.setProperty("id","0")
         ui.newReference.setVisible(True)
-        ui.newReference.setDisabled(False  )
-        ui.titleBar.clear()
-        ui.bodyBar.clear()
-        ui.sourceBar.clear()
+        ui.newReference.setDisabled(False)
         ui.newReference.setWindowTitle("New Reference")
+        ui.titleBar.setFocus()
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
@@ -361,7 +360,43 @@ def populate_reference_table(caller):
         ui.reference_table.removeRow(ui.reference_table.rowAt(0))
     if(caller=='me'):
         s = ui.category_tree
+        if(s.currentItem()== None):
+            return
         sql = "SELECT `*` FROM `reference` WHERE cat_id=" + s.currentItem().text(1)
+    elif(caller=="search_bar"):
+        s = ui.search_bar
+        phrase = s.text()
+        if (phrase == ""):
+            populate_reference_table("me")
+            return
+        else:
+            if (phrase[0] == '!'):
+                if(len(phrase)<3):
+                    return
+
+                param = phrase[1]
+                i=2
+                only_selected_category = ""
+                if(phrase[2]=='!' and ui.category_tree.currentItem()!=None):
+                    i = 3
+                    only_selected_category = "AND `cat_id` = " + ui.category_tree.currentItem().text(1)
+                if(param == 'b'):
+                    sql = "SELECT `*` FROM `reference` WHERE `body` LIKE('%" + phrase[i:] + "%')"
+                elif(param == 't'):
+                    sql = "SELECT `*` FROM `reference` WHERE `title` LIKE('%" + phrase[i:] + "%')"
+                elif(param == 's'):
+                    sql = "SELECT `*` FROM `reference` WHERE `source` LIKE('%" + phrase[i:] + "%')"
+                else:
+                    return
+                sql += only_selected_category
+
+            else:
+                sql = "SELECT `*` FROM `reference` WHERE `title` LIKE('%"+phrase+"%') OR `body` LIKE('%"+phrase+"%')"
+
+    elif(caller == "date_search"):
+        phrase = ui.date_search.text()
+        sql = "SELECT `*` FROM `reference` WHERE `timestamp` LIKE('" + phrase + "%')"
+
     else:
         s = ui.sender()
         if(s.objectName()=="label_table"):
