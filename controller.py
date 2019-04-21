@@ -362,6 +362,7 @@ def populate_reference_table(caller):
         s = ui.category_tree
         if(s.currentItem()== None):
             return
+        print ("ads")
         sql = "SELECT `*` FROM `reference` WHERE cat_id=" + s.currentItem().text(1)
     elif(caller=="search_bar"):
         s = ui.search_bar
@@ -403,6 +404,7 @@ def populate_reference_table(caller):
             sql = "SELECT `*` FROM `reference` WHERE ref_id IN (SELECT ref_id FROM `reference_label` WHERE lab_id = " + s.item(s.currentRow(), 1).text() + ")"
         elif(s.objectName()=="category_tree"):
             sql = "SELECT `*` FROM `reference` WHERE cat_id=" + s.currentItem().text(1)
+            ui.tabWidget.setTabText(0, s.currentItem().text(0))
 
     cursor = connection.cursor()
     cursor.execute(sql)

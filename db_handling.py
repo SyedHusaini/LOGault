@@ -11,8 +11,8 @@ import pymysql
 # Connect to the database
 connection = pymysql.connect(host='localhost',
                              user='root',
-                             password='password',
-                             db='logault',
+                             password='tipu',
+                             db='logault_final',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
 
