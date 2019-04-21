@@ -428,6 +428,9 @@ def gen_msg_box(icon, text, infotext, wintitle):
 if __name__ == "__main__":
     import sys
     app = logault.QtWidgets.QApplication(sys.argv)
+
+    QtWidgets.QSystemTrayIcon
+
     MainWindow = logault.QtWidgets.QMainWindow()
     ui = logault.Ui_MainWindow()
     ui.setupUi(MainWindow)
