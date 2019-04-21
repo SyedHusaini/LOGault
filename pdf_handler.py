@@ -9,7 +9,7 @@ class PDFViewer(QtWebEngineWidgets.QWebEngineView):
     def __init__(self, pathpdf):
         self.pathpdf = pathpdf
         super(PDFViewer, self).__init__()
-        myCmd = 'pdftotree '+ self.pathpdf+'.pdf' + ' ' + self.pathhtml + ''
+        myCmd = 'pdftohtml '+ self.pathpdf+'.pdf' + ' ' + self.pathhtml + ''
         os.system(myCmd)
         self.load(QtCore.QUrl('file://'+self.pathhtml+".html"))
 
