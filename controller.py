@@ -11,6 +11,8 @@ import dialog as label_dialog
 from new_reference_DialogBox import Ui_Dialog
 import time, subprocess
 from form import Ui_Form
+from pdf_handler import PDFViewer
+
 
 class Local_Label_Dialog:
     Dialog = None
@@ -23,6 +25,7 @@ class Local_Label_Dialog:
         self.Dialog = QtWidgets.QDialog()
         self.dialog = label_dialog.Ui_Dialog()
         self.dialog.setupUi(self.Dialog)
+        self.dialog.label_table.hideColumn(1)#hiding id row
 
     def reset(self):
         self.outdate_check = False
@@ -71,7 +74,6 @@ def remove_tab():
     if(ui.tabWidget.currentIndex()!=0):
         ui.tabWidget.removeTab(ui.tabWidget.currentIndex())
 
-
 def update_labels(ref_id):
     local_label_dialog.outdate_check = True
     if local_label_dialog.rsp == QtWidgets.QDialog.Accepted:
@@ -89,7 +91,6 @@ def update_labels(ref_id):
                           + table.item(i, 1).text() + "')"
                 cursor.execute(sql)
                 connection.commit()
-
 
 def Theme_Khatoni():
     ui.reference_table.setStyleSheet("background-color:slategray;color:white")
@@ -114,7 +115,7 @@ def open_label_dialog():
     cursor.execute(sql)
     ref_result = cursor.fetchall()
 
-    local_label_dialog.dialog.label_table
+    table = local_label_dialog.dialog.label_table
     for i in result:
         chkBoxItem = QTableWidgetItem(i["tag"])
         chkBoxItem.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
@@ -123,21 +124,22 @@ def open_label_dialog():
         if (ref_result.__contains__(i)):
             chkBoxItem.setCheckState(QtCore.Qt.Checked)
             local_label_dialog.checklist[len(local_label_dialog.checklist)-1] = QtCore.Qt.Checked
-        rowposition = local_label_dialog.dialog.label_table.rowCount()
-        local_label_dialog.dialog.label_table.insertRow(rowposition)
-        local_label_dialog.dialog.label_table.setItem(rowposition, 0, chkBoxItem)
-        local_label_dialog.dialog.label_table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
+        rowposition = table.rowCount()
+        table.insertRow(rowposition)
+        table.setItem(rowposition, 0, chkBoxItem)
+        table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
 
 
-    local_label_dialog.dialog.label_table.hideColumn(1)#hiding id row
     local_label_dialog.Dialog.show()
 
     local_label_dialog.rsp = local_label_dialog.Dialog.exec_()  # calling exec so dialog window can stay open and rsp stores which button we pressed
 
 def add_label():
     newLabel = getText("New Label", "Label name:")
+    if(newLabel==None):
+        return
     cursor = connection.cursor()
-    sql = "SELECT * FROM `label`"
+    sql = "SELECT * FROM `logault_final`.`label`"
     cursor.execute(sql)
     result = cursor.fetchall()
     check = False
@@ -150,7 +152,6 @@ def add_label():
                 check = False
                 break;
 
-    cursor = connection.cursor()
     sql = "INSERT INTO `logault_final`.`label` (`tag`) VALUES ('"+newLabel+"')"
     cursor.execute(sql)
     connection.commit()
@@ -224,20 +225,20 @@ def reset_reference_editor():
     ui.newReference.setProperty("path", "")
     ui.newReference.setProperty("id", "0")
 
-
 def display_referenced_pdf():
     s = ui.sender()
     row = s.currentRow()
     path = s.item(row,5).text()
-    Form = QWidget()
-    ui_pdf = Ui_Form()
-    ui_pdf.setupUi(Form)
-    ui.tabWidget.addTab(Form, "PDF")
-    ui.tabWidget.setCurrentIndex(ui.tabWidget.count()-1)
-
-    # print()
     if(path!=""):
-        subprocess.Popen([r''+path], shell=True)
+        path.replace('\\', '/')
+        pdf_viewer = PDFViewer(path[:-4])
+        names = path[:-4].split('/')
+        ui.tabWidget.addTab(pdf_viewer, names[-1])
+        ui.tabWidget.setCurrentIndex(ui.tabWidget.count()-1)#removing first index in pdf_viewer
+
+    # # print()
+    # if(path!=""):
+    #     subprocess.Popen([r''+path[:-4]+".pdf"], shell=True)
 
 def display_reference():
     ui.newReference.setVisible(True)
@@ -269,6 +270,8 @@ def make_new_category():
         return
     selected_folder = ui.category_tree.currentItem()
     newTitle = getText("Category Detail", "Title:")
+    if(newTitle==None):
+        return
     for i in range(0, selected_folder.childCount()):
         if(selected_folder.child(i).text(0)==newTitle):
             gen_msg_box(QMessageBox.Warning, "Category Already Exists","Select a unique category title to proceed", "Error 405: Duplicate Category")
@@ -285,6 +288,7 @@ def getText(wintitle, label):
     text, okPressed = QInputDialog.getText(ui, wintitle,label, QLineEdit.Normal, "")
     if okPressed and text != '':
         return (text)
+    return None
 
 def make_new_reference():
     if (ui.category_tree.currentItem()==None or ui.category_tree.currentItem().text(0)=="Recent"):
@@ -310,6 +314,7 @@ def make_new_reference():
         ui.newReference.setDisabled(False)
         ui.newReference.setWindowTitle("New Reference")
         ui.titleBar.setFocus()
+
 
 def open_file_name_dialog():
     options = QFileDialog.Options()
@@ -356,13 +361,13 @@ def find_parent(root, id):
     return None
 
 def populate_reference_table(caller):
+    ui.tabWidget.setCurrentIndex(0)
     while (ui.reference_table.rowCount()):#empty reference table
         ui.reference_table.removeRow(ui.reference_table.rowAt(0))
     if(caller=='me'):
         s = ui.category_tree
         if(s.currentItem()== None):
             return
-        print ("ads")
         sql = "SELECT `*` FROM `reference` WHERE cat_id=" + s.currentItem().text(1)
     elif(caller=="search_bar"):
         s = ui.search_bar
@@ -423,11 +428,11 @@ def populate_label_table():
     while(ui.label_table.rowCount()):
         ui.label_table.removeRow(ui.label_table.rowAt(0))
     cursor = connection.cursor()
-    sql = "SELECT `*` FROM `label`"
+    sql = "SELECT `*` FROM `logault_final`.`label`"
     cursor.execute(sql)
     result = cursor.fetchall()
     for i in result:
-        rowposition = ui.reference_table.rowCount()
+        rowposition = ui.label_table.rowCount()
         ui.label_table.insertRow(rowposition)
         ui.label_table.setItem(rowposition, 0, QTableWidgetItem(i["tag"]))
         ui.label_table.setItem(rowposition, 1, QTableWidgetItem(str(i["lab_id"])))
@@ -445,8 +450,6 @@ def gen_msg_box(icon, text, infotext, wintitle):
 if __name__ == "__main__":
     import sys
     app = logault.QtWidgets.QApplication(sys.argv)
-
-    QtWidgets.QSystemTrayIcon
 
     MainWindow = logault.QtWidgets.QMainWindow()
     ui = logault.Ui_MainWindow()
